@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Setting2.cs" />
+    <Compile Include="Courier.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="Delivery.cs" />
+    <Compile Include="DosageForm.cs" />
+    <Compile Include="DrugType.cs" />
+    <Compile Include="Employee.cs" />
+    <Compile Include="EmployeeAttendance.cs" />
+    <Compile Include="EmployeeRole.cs" />
+    <Compile Include="EmployeeTraining.cs" />
+    <Compile Include="Equipment.cs" />
+    <Compile Include="Instrument.cs" />
+    <Compile Include="ItemsInOrder.cs" />
+    <Compile Include="ItemsSupply.cs" />
+    <Compile Include="Manufacturer.cs" />
+    <Compile Include="Medication.cs" />
+    <Compile Include="Medicine.cs" />
+    <Compile Include="MedicineDiscount.cs" />
+    <Compile Include="MedicineReview.cs" />
+    <Compile Include="MedicineSupplier.cs" />
+    <Compile Include="MedicineType.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="StorageRule.cs" />
+    <Compile Include="Supplier.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+</Project>

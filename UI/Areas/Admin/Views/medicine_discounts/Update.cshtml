@@ -1,0 +1,46 @@
+﻿@model MedicineDiscountModel
+
+@{
+	var exists = Model != null && Model.Id != 0;
+	ViewBag.Title = (exists ? "Редактирование" : "Создание") + " MedicineDiscount";
+}
+
+<form asp-action="Update" asp-antiforgery="true" method="post">
+	<div class="row">
+		<input type="hidden" asp-for="Id"/>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="MedicineId"></label>
+				<input type="text" asp-for="MedicineId" class="form-control"/>
+				<span asp-validation-for="MedicineId" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Percentage"></label>
+				<input type="text" asp-for="Percentage" class="form-control"/>
+				<span asp-validation-for="Percentage" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="StartDate"></label>
+				<input type="text" asp-for="StartDate" class="form-control dateTimePicker"/>
+				<span asp-validation-for="StartDate" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="EndDate"></label>
+				<input type="text" asp-for="EndDate" class="form-control dateTimePicker"/>
+				<span asp-validation-for="EndDate" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<button class="btn btn-outline-primary" type="submit">@(exists ? "Сохранить" : "Добавить")</button>
+			<a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+		</div>
+	</div>
+</form>

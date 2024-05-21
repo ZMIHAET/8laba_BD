@@ -1,0 +1,90 @@
+﻿@model MedicineViewModel
+
+@{
+	ViewBag.Title = "deliveries";
+	var pagedList = Html.PagedList(Model.delivery_model.PagesInfo.ItemsCount, Model.delivery_model.PagesInfo.ItemsPerPage, Model.delivery_model.PagesInfo.CurrentPage,
+		Model.delivery_model.PagesInfo.DisplayedPages, pageNumber => Url.Action(Url.GetAction(), new
+		{
+			page = pageNumber
+		}), new PagedListExtensions.PagedListRenderParams());
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card mb-3">
+			<div class="card-body">
+				<a asp-action="Update" class="btn btn-outline-primary">Добавить</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		@pagedList
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<tr>
+					<th class="text-center">ID</th>
+					<th class="text-center">ID медикаментов</th>
+					<th class="text-center">ID курьера</th>
+					<th class="text-center">ID заказа</th>
+					<th class="text-center">Дата</th>
+					<th class="text-center">Расстояние</th>
+					@if (User.IsInRole(nameof(UserRole.Developer)))
+                    {
+					<th class="text-center">Действия</th>
+					}
+				</tr>
+				@foreach (var item in Model.delivery_model.Objects)
+				{
+					var medicine_name = Model.medicine_model.Objects.Where(medicine_name => medicine_name.Id == item.MedicineId).ToList();
+					var cour_name = Model.cour_model.Objects.Where(cour_name => cour_name.Id == item.CourierId).ToList();
+					var ord_status = Model.order_model.Objects.Where(ord_status => ord_status.Id == item.OrderId).ToList();
+
+					<tr>
+						<td class="text-center">
+							@item.Id
+						</td>
+						<td class="text-center">
+							@Html.Raw(string.Join(" ", medicine_name.Select(s => string.Format(" {0}", s.MedicineName))))
+
+						</td>
+						<td class="text-center">
+							@Html.Raw(string.Join(" ", cour_name.Select(s => string.Format(" {0}", s.FullName))))
+						</td>
+						<td class="text-center">
+							@Html.Raw(string.Join(" ", ord_status.Select(s => string.Format(" {0}", s.Status))))
+						</td>
+						<td class="text-center">
+							@item.Date
+						</td>
+						<td class="text-center">
+							@item.Distance
+						</td>
+						@if (User.IsInRole(nameof(UserRole.Developer)))
+                        {
+						<td class="text-center">
+
+							<a asp-action="Update" asp-route-id="@item.Id">Изменить</a><br/>
+							<a asp-action="Delete" asp-route-id="@item.Id" class="delete-object-button">Удалить</a>
+						</td>
+						}
+
+					</tr>
+				}
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		@pagedList
+	</div>
+</div>

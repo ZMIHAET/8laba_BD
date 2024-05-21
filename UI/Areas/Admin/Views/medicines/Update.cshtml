@@ -1,0 +1,81 @@
+﻿@model MedicineModel
+
+@{
+	var exists = Model != null && Model.Id != 0;
+	ViewBag.Title = (exists ? "Редактирование" : "Создание") + " Medicine";
+}
+
+<form asp-action="Update" asp-antiforgery="true" method="post">
+	<div class="row">
+		<input type="hidden" asp-for="Id"/>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="MedicineName"></label>
+				<input type="text" asp-for="MedicineName" class="form-control"/>
+				<span asp-validation-for="MedicineName" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="TypeId"></label>
+				<input type="text" asp-for="TypeId" class="form-control"/>
+				<span asp-validation-for="TypeId" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="StorageRuleId"></label>
+				<input type="text" asp-for="StorageRuleId" class="form-control"/>
+				<span asp-validation-for="StorageRuleId" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="ExpiryDate"></label>
+				<input type="text" asp-for="ExpiryDate" class="form-control dateTimePicker"/>
+				<span asp-validation-for="ExpiryDate" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Price"></label>
+				<input type="text" asp-for="Price" class="form-control"/>
+				<span asp-validation-for="Price" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Weight"></label>
+				<input type="text" asp-for="Weight" class="form-control"/>
+				<span asp-validation-for="Weight" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="ManufacturerId"></label>
+				<input type="text" asp-for="ManufacturerId" class="form-control"/>
+				<span asp-validation-for="ManufacturerId" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="QuantityOnStock"></label>
+				<input type="text" asp-for="QuantityOnStock" class="form-control"/>
+				<span asp-validation-for="QuantityOnStock" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="PrescriptionStatusName"></label>
+				<input type="text" asp-for="PrescriptionStatusName" class="form-control"/>
+				<span asp-validation-for="PrescriptionStatusName" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<button class="btn btn-outline-primary" type="submit">@(exists ? "Сохранить" : "Добавить")</button>
+			<a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Заказы с определённой ценой";
+}
+@model List<UI.Areas.Public.Models.OrderInfoViewModel>
+<h1>Заказы с определённой ценой</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>CustomerId</th>
+            <th>EmployeeId</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>TotalPrice</th>
+            <th>Id_2</th>
+            <th>MedicineId</th>
+            <th>CourierId</th>
+            <th>OrderId</th>
+            <th>Date_2</th>
+            <th>Distance</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.CustomerId</td>
+                <td>@item.EmployeeId</td>
+                <td>@item.Date</td>
+                <td>@item.Status</td>
+                <td>@item.TotalPrice</td>
+                <td>@item.Id_2</td>
+                <td>@item.MedicineId</td>
+                <td>@item.CourierId</td>
+                <td>@item.OrderId</td>
+                <td>@item.Date_2</td>
+                <td>@item.Distance<br /></td><br /> 
+            </tr>
+        }
+    </tbody>
+</table>

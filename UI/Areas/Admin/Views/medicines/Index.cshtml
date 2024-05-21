@@ -1,0 +1,105 @@
+﻿@model DrugTypesViewModel
+
+@{
+	ViewBag.Title = "medicines";
+	var pagedList = Html.PagedList(Model.medicine_model.PagesInfo.ItemsCount, Model.medicine_model.PagesInfo.ItemsPerPage, Model.medicine_model.PagesInfo.CurrentPage,
+		Model.medicine_model.PagesInfo.DisplayedPages, pageNumber => Url.Action(Url.GetAction(), new
+		{
+			page = pageNumber
+		}), new PagedListExtensions.PagedListRenderParams());
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card mb-3">
+			<div class="card-body">
+				<a asp-action="Update" class="btn btn-outline-primary">Добавить</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		@pagedList
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<tr>
+					<th class="text-center">ID</th>
+					<th class="text-center">Название препарата</th>
+					<th class="text-center">ID типа</th>
+					<th class="text-center">ID правила хранения</th>
+					<th class="text-center">Дата истечения срока действия</th>
+					<th class="text-center">Цена</th>
+					<th class="text-center">Вес</th>
+					<th class="text-center">ID производства</th>
+					<th class="text-center">Количество на складе</th>
+					<th class="text-center">Статус рецепта</th>
+					@if (User.IsInRole(nameof(UserRole.Developer)))
+                    {
+					<th class="text-center">Действия</th>
+					}
+				</tr>
+				@foreach (var item in Model.medicine_model.Objects)
+				{
+					var DT_name = Model.DT_model.Objects.Where(DT_name => DT_name.Id == item.TypeId).ToList();
+					var rule_name = Model.SR_model.Objects.Where(rule_name => rule_name.Id == item.StorageRuleId).ToList();
+					var man_name = Model.manufacturer_model.Objects.Where(man_name => man_name.Id == item.ManufacturerId).ToList();
+
+					<tr>
+						<td class="text-center">
+							@item.Id
+						</td>
+						<td class="text-center">
+							@item.MedicineName
+						</td>
+						<td class="text-center">
+							@Html.Raw(string.Join(" ", DT_name.Select(s => string.Format(" {0}", s.TypeName))))
+						</td>
+						<td class="text-center">
+							@Html.Raw(string.Join(" ", rule_name.Select(s => string.Format(" {0}", s.RuleName))))
+						</td>
+						<td class="text-center">
+							@item.ExpiryDate
+						</td>
+						<td class="text-center">
+							@item.Price
+						</td>
+						<td class="text-center">
+							@item.Weight
+						</td>
+						<td class="text-center">
+							@Html.Raw(string.Join(" ", man_name.Select(s => string.Format(" {0}", s.ManufacturerName))))
+						</td>
+						<td class="text-center">
+							@item.QuantityOnStock
+						</td>
+						<td class="text-center">
+							@item.PrescriptionStatusName
+						</td>
+						@if (User.IsInRole(nameof(UserRole.Developer)))
+                        {
+						<td class="text-center">
+
+							<a asp-action="Update" asp-route-id="@item.Id">Изменить</a><br/>
+							<a asp-action="Delete" asp-route-id="@item.Id" class="delete-object-button">Удалить</a>
+						</td>
+						}
+
+					</tr>
+				}
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		@pagedList
+	</div>
+</div>

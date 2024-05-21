@@ -1,0 +1,25 @@
+﻿@model CustomerModel
+
+@{
+	var exists = Model != null && Model.Id != 0;
+	ViewBag.Title = (exists ? "Редактирование" : "Создание") + " Customer";
+}
+
+	<div class="row">
+		<div class="col-md-1 col-sm-1">
+			<label>Id покупателя</label>
+			<p>@ViewBag.Customer.Id</p>
+		</div>
+		<div class="col-md-1 col-sm-1">
+			<label>Имя</label>
+			<p>@ViewBag.Customer.FullName</p>
+		</div>
+		<div class="col-md-1 col-sm-1">
+			<label>Дата рождения</label>
+			<p>@ViewBag.Customer.DateOfBirth</p>
+		</div>
+		<div class="col-md-1 col-sm-1">
+			<label>Номер телефона</label>
+			<p>@ViewBag.Customer.Phone</p>
+		</div>
+	</div>

@@ -1,0 +1,84 @@
+﻿@model MedicineViewModel
+
+@{
+	ViewBag.Title = "items_supply";
+	var pagedList = Html.PagedList(Model.IS_model.PagesInfo.ItemsCount, Model.IS_model.PagesInfo.ItemsPerPage, Model.IS_model.PagesInfo.CurrentPage,
+		Model.IS_model.PagesInfo.DisplayedPages, pageNumber => Url.Action(Url.GetAction(), new
+		{
+			page = pageNumber
+		}), new PagedListExtensions.PagedListRenderParams());
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card mb-3">
+			<div class="card-body">
+				<a asp-action="Update" class="btn btn-outline-primary">Добавить</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		@pagedList
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<tr>
+					<th class="text-center">ID</th>
+					<th class="text-center">ID медикаментов</th>
+					<th class="text-center">ID поставляемых медикаментов</th>
+					<th class="text-center">Количество</th>
+					<th class="text-center">Цена за единицу</th>
+					@if (User.IsInRole(nameof(UserRole.Developer)))
+                    {
+					<th class="text-center">Действия</th>
+					}
+				</tr>
+				@foreach (var item in Model.IS_model.Objects)
+				{
+					var medicine_name = Model.medicine_model.Objects.Where(medicine_name => medicine_name.Id == item.MedicineId).ToList();
+					var MS_name = Model.MS_model.Objects.Where(MS_name => MS_name.Id == item.MedicineSupplierId).ToList();
+
+					<tr>
+						<td class="text-center">
+							@item.Id
+						</td>
+						<td class="text-center">
+							@Html.Raw(string.Join(" ", medicine_name.Select(s => string.Format(" {0}", s.MedicineName))))
+						</td>
+						<td class="text-center">
+							@Html.Raw(string.Join(" ", MS_name.Select(s => string.Format(" {0}", s.SupplyDate))))
+						</td>
+						<td class="text-center">
+							@item.Quantity
+						</td>
+						<td class="text-center">
+							@item.UnitPrice
+						</td>
+						@if (User.IsInRole(nameof(UserRole.Developer)))
+                        {
+						<td class="text-center">
+
+							<a asp-action="Update" asp-route-id="@item.Id">Изменить</a><br/>
+							<a asp-action="Delete" asp-route-id="@item.Id" class="delete-object-button">Удалить</a>
+						</td>
+						}
+
+					</tr>
+				}
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		@pagedList
+	</div>
+</div>

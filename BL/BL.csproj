@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog" Version="5.2.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\Dal\Dal.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\Tools\Tools.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UsersBL.cs" />
+    <Compile Include="couriersBL.cs" />
+    <Compile Include="customersBL.cs" />
+    <Compile Include="deliveriesBL.cs" />
+    <Compile Include="dosage_formsBL.cs" />
+    <Compile Include="drug_typesBL.cs" />
+    <Compile Include="employeesBL.cs" />
+    <Compile Include="employee_attendanceBL.cs" />
+    <Compile Include="employee_rolesBL.cs" />
+    <Compile Include="employee_trainingsBL.cs" />
+    <Compile Include="equipmentBL.cs" />
+    <Compile Include="instrumentsBL.cs" />
+    <Compile Include="items_in_orderBL.cs" />
+    <Compile Include="items_supplyBL.cs" />
+    <Compile Include="manufacturersBL.cs" />
+    <Compile Include="medicationsBL.cs" />
+    <Compile Include="medicinesBL.cs" />
+    <Compile Include="medicine_discountsBL.cs" />
+    <Compile Include="medicine_reviewsBL.cs" />
+    <Compile Include="medicine_suppliersBL.cs" />
+    <Compile Include="medicine_typesBL.cs" />
+    <Compile Include="ordersBL.cs" />
+    <Compile Include="storage_rulesBL.cs" />
+    <Compile Include="suppliersBL.cs" />
+  </ItemGroup>
+</Project>

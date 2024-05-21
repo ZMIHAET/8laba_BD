@@ -1,0 +1,91 @@
+﻿@model MedicineViewModel
+
+@{
+    var exists = ViewBag.IIO != null && ViewBag.IIO.Id != 0;
+    ViewBag.Title = "Выбранный" + " товар";}
+
+	<div class="row">
+		<div class="col-md-1 col-sm-1">
+			<label>Id товара в заказе</label>
+			<p>@ViewBag.IIO.Id</p>
+		</div>
+		<div class="col-md-1 col-sm-1">
+			<label>Id медикамента</label>
+			<p>@ViewBag.IIO.MedicineId</p>
+		</div>
+		<div class="col-md-1 col-sm-1">
+			<label>Количество</label>
+			<p>@ViewBag.IIO.Quantity</p>
+		</div>
+
+	</div>
+<h2 class ="text-center">Связанные медикаменты</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+					<th class="text-center">Название препарата</th>
+					<th class="text-center">ID типа</th>
+					<th class="text-center">ID правила хранения</th>
+					<th class="text-center">Дата истечения срока действия</th>
+					<th class="text-center">Цена</th>
+					<th class="text-center">Вес</th>
+					<th class="text-center">ID производства</th>
+					<th class="text-center">Количество на складе</th>
+					<th class="text-center">Статус рецепта</th>
+                    @if (User.IsInRole(nameof(UserRole.Developer)))
+                    {
+                        <th class="text-center">Действия</th>
+                    }
+                </tr>
+
+                @{
+                var medicines = Model.medicine_model.Objects.Where(x => x.Id == ViewBag.IIO.MedicineId).ToList();
+                        foreach (var item in medicines){
+
+                    <tr>
+						<td class="text-center">
+							@item.MedicineName
+						</td>
+						<td class="text-center">
+							@item.TypeId
+						</td>
+						<td class="text-center">
+							@item.StorageRuleId
+						</td>
+						<td class="text-center">
+							@item.ExpiryDate
+						</td>
+						<td class="text-center">
+							@item.Price
+						</td>
+						<td class="text-center">
+							@item.Weight
+						</td>
+						<td class="text-center">
+							@item.ManufacturerId
+						</td>
+						<td class="text-center">
+							@item.QuantityOnStock
+						</td>
+						<td class="text-center">
+							@item.PrescriptionStatusName
+						</td>
+						@if (User.IsInRole(nameof(UserRole.Developer)))
+                        {
+						<td class="text-center">
+
+							<a asp-controller= "medicines" asp-action="Update" asp-route-id="@item.Id">Изменить</a><br/>
+							<a asp-controller= "medicines" asp-action="Delete" asp-route-id="@item.Id" class="delete-object-button">Удалить</a>
+						</td>
+						}
+
+                    </tr>
+                }
+                }
+            </table>
+        </div>
+    </div>
+</div>
+

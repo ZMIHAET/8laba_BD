@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Количество работников каждой роли";
+}
+@model List<UI.Areas.Public.Models.ViewCountEmployeesWithRolesViewModel>
+<h1>Количество работников каждой роли</h1>
+<table>
+    <thead>
+        <tr>
+            <th>RoleName</th>
+            <th>CountEmployees</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.RoleName</td>
+                <td>@item.CountEmployees<br /></td><br /> 
+            </tr>
+        }
+    </tbody>
+</table>

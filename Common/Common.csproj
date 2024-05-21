@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\Mail\MailExtensions.cs" />
+    <Compile Include="Configuration\Mail\SmtpConfiguration.cs" />
+    <Compile Include="Enums\UserRole.cs" />
+    <Compile Include="Enums\EnumExtensions.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Search\BaseSearchParams.cs" />
+    <Compile Include="Search\UsersSearchParams.cs" />
+    <Compile Include="Search\SearchResult.cs" />
+    <Compile Include="Configuration\SharedConfiguration.cs" />
+    <Compile Include="Search\couriersSearchParams.cs" />
+    <Compile Include="Search\customersSearchParams.cs" />
+    <Compile Include="Search\deliveriesSearchParams.cs" />
+    <Compile Include="Search\dosage_formsSearchParams.cs" />
+    <Compile Include="Search\drug_typesSearchParams.cs" />
+    <Compile Include="Search\employeesSearchParams.cs" />
+    <Compile Include="Search\employee_attendanceSearchParams.cs" />
+    <Compile Include="Search\employee_rolesSearchParams.cs" />
+    <Compile Include="Search\employee_trainingsSearchParams.cs" />
+    <Compile Include="Search\equipmentSearchParams.cs" />
+    <Compile Include="Search\instrumentsSearchParams.cs" />
+    <Compile Include="Search\items_in_orderSearchParams.cs" />
+    <Compile Include="Search\items_supplySearchParams.cs" />
+    <Compile Include="Search\manufacturersSearchParams.cs" />
+    <Compile Include="Search\medicationsSearchParams.cs" />
+    <Compile Include="Search\medicinesSearchParams.cs" />
+    <Compile Include="Search\medicine_discountsSearchParams.cs" />
+    <Compile Include="Search\medicine_reviewsSearchParams.cs" />
+    <Compile Include="Search\medicine_suppliersSearchParams.cs" />
+    <Compile Include="Search\medicine_typesSearchParams.cs" />
+    <Compile Include="Search\ordersSearchParams.cs" />
+    <Compile Include="Search\storage_rulesSearchParams.cs" />
+    <Compile Include="Search\suppliersSearchParams.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Troschuetz.Random" Version="5.0.1" />
+  </ItemGroup>
+</Project>

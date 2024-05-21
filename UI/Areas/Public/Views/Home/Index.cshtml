@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Аптека";
+}
+
+<h1>Аптека</h1>
+
+<div class="form-section">
+	<a class="btn btn-primary @(Url.GetController() == "Customers" ? "active" : "")" asp-area="Admin" asp-controller="Customers" asp-action="Index">
+    Админская панель
+	</a>
+
+    <h2>Процедуры:</h2>
+
+    <form asp-area="Public" asp-controller="Home" asp-action="ordersINFO_2Method" method="post">
+        <label for="status">Статус:</label>
+        <input type="text" id="status" name="status" required />
+        <button type="submit">Количество покупателей, получивших свой заказ</button>
+    </form>
+
+    <form asp-area="Public" asp-controller="Home" asp-action="OrderInfoMethod" method="post">
+        <label for="price">Цена:</label>
+        <input type="number" id="price" name="price" required>
+        <button type="submit">Заказы с определённой ценой</button>
+    </form>
+
+	<h2>Представления:</h2>
+
+	<form asp-area="Public" asp-controller="Home" asp-action="ViewCountOrdersWithCustomersMethod" method="post">
+        <label for="status">Количество заказов каждого покупателя:</label>
+        <button type="submit">Показать</button>
+    </form>
+
+	<form asp-area="Public" asp-controller="Home" asp-action="ViewCountEmployeesWithRolesMethod" method="post">
+        <label for="status">Количество работников каждой роли:</label>
+        <button type="submit">Показать</button>
+    </form>
+</div>

@@ -1,0 +1,79 @@
+﻿@model SupplierViewModel
+
+@{
+	ViewBag.Title = "medicine_suppliers";
+	var pagedList = Html.PagedList(Model.MedSup_model.PagesInfo.ItemsCount, Model.MedSup_model.PagesInfo.ItemsPerPage, Model.MedSup_model.PagesInfo.CurrentPage,
+		Model.MedSup_model.PagesInfo.DisplayedPages, pageNumber => Url.Action(Url.GetAction(), new
+		{
+			page = pageNumber
+		}), new PagedListExtensions.PagedListRenderParams());
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card mb-3">
+			<div class="card-body">
+				<a asp-action="Update" class="btn btn-outline-primary">Добавить</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		@pagedList
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<tr>
+					<th class="text-center">ID</th>
+					<th class="text-center">ID поставки</th>
+					<th class="text-center">Дата поставки</th>
+					<th class="text-center">Цена</th>
+					@if (User.IsInRole(nameof(UserRole.Developer)))
+                    {
+					<th class="text-center">Действия</th>
+					}
+				</tr>
+				@foreach (var item in Model.MedSup_model.Objects)
+				{
+					var supplier_name = Model.supplier_model.Objects.Where(supplier_name => supplier_name.Id == item.SupplierId).ToList();
+
+					<tr>
+						<td class="text-center">
+							@item.Id
+						</td>
+						<td class="text-center">
+							@Html.Raw(string.Join(" ", supplier_name.Select(s => string.Format(" {0}", s.SupplierName))))
+						</td>
+						<td class="text-center">
+							@item.SupplyDate
+						</td>
+						<td class="text-center">
+							@item.TotalPrice
+						</td>
+						@if (User.IsInRole(nameof(UserRole.Developer)))
+                        {
+						<td class="text-center">
+
+							<a asp-action="Update" asp-route-id="@item.Id">Изменить</a><br/>
+							<a asp-action="Delete" asp-route-id="@item.Id" class="delete-object-button">Удалить</a>
+						</td>
+						}
+
+					</tr>
+				}
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		@pagedList
+	</div>
+</div>

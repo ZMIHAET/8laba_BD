@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Количество заказов каждого покупателя";
+}
+@model List<UI.Areas.Public.Models.ViewCountOrdersWithCustomersViewModel>
+<h1>Количество заказов каждого покупателя</h1>
+<table>
+    <thead>
+        <tr>
+            <th>FullName</th>
+            <th>CountOrders</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FullName</td>
+                <td>@item.CountOrders<br /></td><br /> 
+            </tr>
+        }
+    </tbody>
+</table>
